@@ -14,7 +14,8 @@ phases:
       - env
       - docker buildx create --use
       - docker buildx build --tag ${CONTAINER_REPOSITORY_URL}:${TAG_NAME} --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from type=registry,ref=${CONTAINER_REPOSITORY_URL}:cache --cache-to mode=max,image-manifest=true,oci-mediatypes=true,type=registry,ref=${CONTAINER_REPOSITORY_URL}:cache .
-
+      - docker image ls
   post_build:
     commands:
-      - docker push ${CONTAINER_REPOSITORY_URL}:${TAG_NAME}
+      - docker image ls
+      - docker push ${CONTAINER_REPOSITORY_URL}:latest
