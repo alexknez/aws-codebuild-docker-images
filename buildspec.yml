@@ -13,7 +13,7 @@ phases:
       - cd ./al2/x86_64/standard/5.0
       - env
       - docker buildx create --use
-      - docker buildx build --tag ${CONTAINER_REPOSITORY_URL}:${TAG_NAME} --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from type=registry,ref=${CONTAINER_REPOSITORY_URL}:cache --cache-to mode=max,image-manifest=true,oci-mediatypes=true,type=registry,ref=${CONTAINER_REPOSITORY_URL}:cache .
+      - docker buildx build --build-arg BUILDKIT_INLINE_CACHE=1 --cache-from type=registry,ref=${CONTAINER_REPOSITORY_URL}:cache --cache-to mode=max,image-manifest=true,oci-mediatypes=true,type=registry,ref=${CONTAINER_REPOSITORY_URL}:cache -t $CONTAINER_REPOSITORY_URL:$TAG_NAME --load .
       - docker image ls
   post_build:
     commands:
