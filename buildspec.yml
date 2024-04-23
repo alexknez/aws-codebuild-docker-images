@@ -17,4 +17,4 @@ phases:
 
   post_build:
     commands:
-      - docker push $CONTAINER_REPOSITORY_URL
+      - docker push ${CONTAINER_REPOSITORY_URL}:${TAG_NAME}
