@@ -24,6 +24,7 @@ RUN set -ex \
     && rpm --import https://download.mono-project.com/repo/xamarin.gpg \
     && curl https://download.mono-project.com/repo/centos7-stable.repo | tee /etc/yum.repos.d/mono-centos7-stable.repo \
     && yum groupinstall -y -q "Development tools" \
+    && echo "test" \
     && yum install -y -q \
            ImageMagick asciidoc bzip2-devel cvs cvsps \
            docbook-dtds docbook-style-xsl e2fsprogs expat-devel expect fakeroot \
@@ -363,6 +364,7 @@ ENV PHP_BUILD_EXTRA_MAKE_ARGUMENTS="-j4"
 
 RUN phpenv update \
     && phpenv install $PHP_83_VERSION \
+    && echo "test" \
     && phpenv install $PHP_82_VERSION \
     && phpenv global $PHP_82_VERSION \
     && php -v \
@@ -387,6 +389,7 @@ ENV GOENV_DISABLE_GOPATH=1
 ENV GOPATH="/go"
 
 RUN goenv install $GOLANG_22_VERSION \
+    && echo "test" \
     && goenv install $GOLANG_21_VERSION \
     && goenv install $GOLANG_20_VERSION \
     && goenv global $GOLANG_20_VERSION \
@@ -412,6 +415,7 @@ ENV DOTNET_ROOT="/root/.dotnet"
 
 # Add .NET Core 8 Global Tools install folder to PATH
 RUN /usr/local/bin/dotnet-install.sh -v $DOTNET_8_SDK_VERSION \
+    && echo "test" \
     && /usr/local/bin/dotnet-install.sh -v $DOTNET_6_SDK_VERSION \
     && dotnet --list-sdks \
     && cd /codebuild && dotnet new globaljson --force --sdk-version $DOTNET_6_GLOBAL_JSON_SDK_VERSION --roll-forward feature
